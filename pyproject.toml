@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "django-api"
+name = "escola_api_drf"
 version = "0.1.0"
 description = ""
 authors = ["arturj <arturjardel9@gmail.com>"]
 readme = "README.md"
-packages = [{include = "django_api"}]
+packages = [{include = "escola_api_drf"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"

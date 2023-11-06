@@ -1,1 +1,1 @@
-# django-api
+# escola_api_drf
