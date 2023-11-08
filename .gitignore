@@ -396,3 +396,39 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Arquivos de banco de dados SQLite
+db.sqlite3
+
+# Diretório de mídia
+/media/
+
+# Ambiente virtual (venv ou virtualenv)
+venv/
+env/
+
+# Arquivos de cache Python
+__pycache__/
+*.pyc
+
+# Arquivos de configuração sensíveis (substitua 'secrets.json' pelo nome do seu arquivo)
+secrets.json
+
+# Arquivos de log
+*.log
+
+# Diretórios de logs
+logs/
+
+# Arquivos de compilação (dependendo das ferramentas usadas)
+node_modules/
+dist/
+
+# Arquivos específicos para Django (migrations e db)
+**/migrations/
+**/migrations/__init__.py
+**/db.sqlite3
+
+# Arquivos de ambiente (por exemplo, .env)
+.env
+
