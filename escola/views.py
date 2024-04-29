@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from escola.models import Aluno, Curso, Matricula
 from escola.serializer import (
     AlunoSerializer,
+    AlunoSerializerV2,
     CursoSerializer,
     ListaAlunosMatriculadosSerializer,
     ListaMatriculasAlunoSerializer,
@@ -16,9 +17,14 @@ class AlunosViewSet(viewsets.ModelViewSet):
     """Exibindo todos os alunos e alunas"""
 
     queryset = Aluno.objects.all()
-    serializer_class = AlunoSerializer
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
+
+    def get_serializer_class(self):
+        if self.request.version == 'v2':
+            return AlunoSerializerV2
+        else:
+            return AlunoSerializer
 
 
 class CursosViewSet(viewsets.ModelViewSet):
@@ -30,8 +36,8 @@ class CursosViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 
-class MatriculasViewSet(viewsets.ModelViewSet):
-    """Exibindo todas as matrículas"""
+class MatriculaViewSet(viewsets.ModelViewSet):
+    """Listando todas as matrículas"""
 
     queryset = Matricula.objects.all()
     serializer_class = MatriculaSerializer
@@ -40,26 +46,24 @@ class MatriculasViewSet(viewsets.ModelViewSet):
 
 
 class ListaMatriculasAluno(generics.ListAPIView):
-    """Listando as matrículas de um aluno (a)"""
+    """Listando as matrículas de um aluno ou aluna"""
 
     def get_queryset(self):
         queryset = Matricula.objects.filter(aluno_id=self.kwargs['pk'])
         return queryset
 
     serializer_class = ListaMatriculasAlunoSerializer
-
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
 
 
 class ListaAlunosMatriculados(generics.ListAPIView):
-    """Listando alunos (as) matriculados em um curso"""
+    """Listando alunos e alunas matriculados em um curso"""
 
     def get_queryset(self):
         queryset = Matricula.objects.filter(curso_id=self.kwargs['pk'])
         return queryset
 
     serializer_class = ListaAlunosMatriculadosSerializer
-
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]

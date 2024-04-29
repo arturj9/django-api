@@ -17,6 +17,10 @@ ruff = "^0.1.5"
 blue = "^0.9.1"
 psycopg2-binary = "^2.9.9"
 python-dotenv = "^1.0.0"
+gunicorn = "^21.2.0"
+faker = "^24.14.1"
+validate-docbr = "^1.10.0"
+text-unidecode = "^1.3"
 
 
 [build-system]
@@ -42,6 +46,7 @@ extend-exclude = '(migrations/)'
 lint = 'ruff . && blue --check . --diff'
 format = 'blue .  && isort .'
 run = 'python3 manage.py runserver'
+csu = 'python3 manage.py createsuperuser'
 make = 'python3 manage.py makemigrations'
 migrate = 'python3 manage.py migrate'
 pre_test = 'task lint'
