@@ -19,13 +19,13 @@ class AlunosViewSet(viewsets.ModelViewSet):
     queryset = Aluno.objects.all()
 
     def get_serializer_class(self):
-        if self.request.version == 'v2':
+        if self.request and self.request.version == 'v2':
             return AlunoSerializerV2
         else:
             return AlunoSerializer
 
     def create(self, request):
-        serializer = self.serializer_class(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             response = Response(

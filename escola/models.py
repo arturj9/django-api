@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Aluno(models.Model):
-    foto = models.ImageField(default='')
+    foto = models.ImageField(blank=True)
     nome = models.CharField(max_length=30)
     rg = models.CharField(max_length=9)
     cpf = models.CharField(max_length=11)
