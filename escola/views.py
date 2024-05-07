@@ -1,5 +1,4 @@
 from rest_framework import generics, viewsets, status
-
 from escola.models import Aluno, Curso, Matricula
 from escola.serializer import (
     AlunoSerializer,
@@ -9,8 +8,9 @@ from escola.serializer import (
     ListaMatriculasAlunoSerializer,
     MatriculaSerializer,
 )
-
 from rest_framework.response import Response
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 
 class AlunosViewSet(viewsets.ModelViewSet):
@@ -68,6 +68,10 @@ class MatriculaViewSet(viewsets.ModelViewSet):
             id = str(serializer.data['id'])
             response['Location'] = request.build_absolute_uri() + id
             return response
+
+    @method_decorator(cache_page(60))
+    def dispatch(self, *args, **kwargs):
+        return super(MatriculaViewSet, self).dispatch(*args, **kwargs)
 
 
 class ListaMatriculasAluno(generics.ListAPIView):
