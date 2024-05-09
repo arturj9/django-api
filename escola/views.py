@@ -33,6 +33,7 @@ class AlunosViewSet(viewsets.ModelViewSet):
             id = str(serializer.data['id'])
             response['Location'] = request.build_absolute_uri() + id
             return response
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CursosViewSet(viewsets.ModelViewSet):
